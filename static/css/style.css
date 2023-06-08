@@ -45,3 +45,37 @@ footer{
 	height:40px;
 	background-color:#0cc500;
 }
+
+#form{	
+	margin-left: 430px;
+	text-align: left;
+
+}
+
+#form_height{
+	line-height: 10px;
+}
+
+#text_box{
+	width: 450px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border:1px solid #000000;
+	height: 30px;
+	
+}
+
+#submit_bottun{
+	width: 15%;
+	height: 10%;
+	margin-top: 15px;
+	margin-left: 150px;
+}
+
+#register{
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+}

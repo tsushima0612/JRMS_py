@@ -5,24 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <title>ログイン画面</title>
+    <title>新規登録</title>
 </head>
 <body>
     <header>
         <h2 id="title">就職活動報告書 管理システム</h2>
-        <h2 id="sub_title">-ログイン</h2>
+        <h2 id="sub_title">-新規登録</h2>
     </header>
-    <h1>ログイン</h1>
+    <h1>新規登録</h1>
     <div id="form">
         <form action="" method="post">
             <label id="label">メールアドレス</label><br>
             <input id="text_box" type="mail" name="mail"><div id="form_height"><br></div>
             <label id="label">パスワード</label><br>
             <input id="text_box" type="password" name="pass"><div id="form_height"><br></div>
-            <a href=""><input id="submit_bottun" type="submit" value="ログイン"></a><div id="form_height"><br></div>
+            <a href=""><input id="submit_bottun" type="submit" value="登録"></a><div id="form_height"><br></div>
         </form>
     </div>
-    <a id="register" href="{{url_for('register_accounts')}}">新規登録</a>
     <footer> </footer>
 </body>
-</html> 
+</html>

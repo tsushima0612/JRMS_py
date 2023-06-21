@@ -49,8 +49,11 @@ footer{
 	background-color:#0cc500;
 }
 
+	/*フォーム周り*/
 #form{	
-	margin-left: 430px;
+	/* margin-left: 430px; */
+	display: flex;
+	justify-content: center;
 	text-align: left;
 
 }
@@ -60,6 +63,8 @@ footer{
 }
 
 #text_box{
+	display: flex;
+	justify-content: center;
 	width: 450px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -81,11 +86,18 @@ footer{
 	color: #000000;
 	font-size: 1.5rem;
 	margin-top: 15px;
-	margin-left: 135px;
-	
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
 }
 
 #register{
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+#back{
 	font-size: 20px;
 	display: flex;
 	justify-content: center;

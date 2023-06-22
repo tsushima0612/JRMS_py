@@ -10,26 +10,28 @@ def index():
 def register_accounts():
     return render_template('register_accounts.html')
 
+@app.route('/register_success')
+def register_success():
+    return render_template('register_success.html')
+
 @app.route('/register_exe', methods=['POST'])
 def register_exe():
-    email = request.form.get('mail')
+    email = request.form.get('email')
     password = request.form.get('pass')
-    print("email:"+email)
     if email == '' or password == '' :
-        error = '登録に失敗しました'
-        print(error)
-        return render_template('register_accounts.html',error = error)        
+        error = 'メールアドレスとパスワードを入力してください'
+        input_data = {'email':email}
+        return render_template('register_accounts.html',error = error,data=input_data)        
      
     count = db.insert_user(email, password)
     
     if count == 1:
-        msg = '登録成功しました'
-        return redirect(url_for('index',msg=msg))
+        return redirect(url_for('register_success'))
     
     else:
-        error = '登録に失敗しました'
-        print(error)
-        return render_template('register_accounts.html',error = error)
+        error = 'このメールアドレスは使用されています'
+        input_data = {'email':email}
+        return render_template('register_accounts.html',error = error,data=input_data)
     
 if __name__ == '__main__':
     app.run(debug=True)

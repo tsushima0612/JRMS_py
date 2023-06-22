@@ -13,16 +13,21 @@
         <h2 id="sub_title">-新規登録</h2>
     </header>
     <h1>新規登録</h1>
+    {% if error != None %}
+    <p id="register_failed" style="line-height: 1px;">{{error}}</p>
+    {% endif %}
     <div id="form">
         <form action="{{url_for('register_exe')}}" method="post">
             <label id="label">メールアドレス</label><br>
-            <input id="text_box" type="mail" name="mail"><div id="form_height"><br></div>
+            <input id="text_box" type="mail" name="email" value="{{data.email if data is defined else ''}}"><div id="form_height"><br></div>
             <label id="label">パスワード</label><br>
             <input id="text_box" type="password" name="pass"><div id="form_height"><br></div>
             <input id="submit_bottun" type="submit" value="登録"><div id="form_height"><br></div>
         </form>
     </div>
-    <a id="back" href="{{url_for('index')}}">もどる</a>
+    <div id="a_tag">
+        <a id="back" href="{{url_for('index')}}">もどる</a>
+    </div>
     <footer> </footer>
 </body>
 </html>

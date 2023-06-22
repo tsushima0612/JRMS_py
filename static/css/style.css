@@ -102,3 +102,17 @@ footer{
 	display: flex;
 	justify-content: center;
 }
+
+#register_failed{
+	color: red;
+}
+
+#register_success{
+	color: blue;
+}
+
+#a_tag{
+	padding: auto;
+	display: flex;
+	justify-content: center;
+}

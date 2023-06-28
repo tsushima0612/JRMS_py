@@ -1,10 +1,36 @@
-from flask import Flask, render_template, url_for, request, redirect
-import db
+from flask import Flask, render_template, url_for, request, redirect,session
+import db,string,random
+
 app= Flask(__name__)
+app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 
 @app.route('/')
 def index():
     return render_template("index.html")
+
+@app.route('/', methods=['POST'])
+def login():
+    mail = request.form.get('mail')
+    password = request.form.get('pass')
+    
+    if db.login(mail,password):
+        session['user'] = True
+        return redirect(url_for('mypage'))
+    else :
+        error = 'ログイン失敗'
+        input_data ={
+            'mail':mail,
+            'pass':password
+        }
+        return render_template('index.html',error=error,deta=input_data)
+
+@app.route('/mypage')
+def mypage():
+    if 'user' in session:
+        return render_template('mypage.html')
+    else:
+        return redirect(url_for('index'))
+
 
 @app.route('/register_accounts')
 def register_accounts():

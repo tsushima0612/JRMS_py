@@ -40,3 +40,29 @@ def insert_user(email,password):
         connection.close()
         
     return count
+
+def login(mail,password):
+    sql = "SELECT hashed_password,salt FROM jrms_accounts WHERE mail = %s"
+    flg = False
+    
+    try :
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql,(mail,))
+        user = cursor.fetchone()
+        
+        if user != None:
+            salt = user[1]
+            hashed_password = get_hash(password, salt)
+
+            if hashed_password == user[0]:
+                flg = True
+                
+    except psycopg2.DataError:
+        flg = False
+        
+    finally :
+        cursor.close()
+        connection.close()
+        
+    return flg

@@ -19,7 +19,7 @@
     <div id="form">
         <form action="{{url_for('login')}}" method="post">
             <label id="label">メールアドレス</label><br>
-            <input id="text_box" type="mail" name="mail"><div id="form_height"><br></div>
+            <input id="text_box" type="mail" name="mail" value="{{data.mail if data is defined else ''}}"><div id="form_height"><br></div>
             <label id="label">パスワード</label><br>
             <input id="text_box" type="password" name="pass"><div id="form_height"><br></div>
             <input id="submit_bottun" type="submit" value="ログイン"><div id="form_height"><br></div>

@@ -4,6 +4,7 @@ import db,string,random
 app= Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 
+# ログイン画面
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -13,17 +14,28 @@ def login():
     mail = request.form.get('mail')
     password = request.form.get('pass')
     
+    if mail == '' or password == '' :
+        error = 'メールアドレスとパスワードを入力してください'
+        input_data = {'mail':mail}
+        return render_template('index.html',error = error,data=input_data)       
+    
     if db.login(mail,password):
         session['user'] = True
         return redirect(url_for('mypage'))
     else :
-        error = 'ログイン失敗'
+        error = 'メールアドレス または パスワードが違います'
         input_data ={
             'mail':mail,
-            'pass':password
         }
-        return render_template('index.html',error=error,deta=input_data)
+        return render_template('index.html',error=error,data=input_data)
 
+#ログアウト
+@app.route('/logout')
+def logout():
+    session.pop('user',None)
+    return redirect(url_for('index'))
+
+# メニュー
 @app.route('/mypage')
 def mypage():
     if 'user' in session:
@@ -31,7 +43,7 @@ def mypage():
     else:
         return redirect(url_for('index'))
 
-
+#　新規登録
 @app.route('/register_accounts')
 def register_accounts():
     return render_template('register_accounts.html')
@@ -59,5 +71,6 @@ def register_exe():
         input_data = {'email':email}
         return render_template('register_accounts.html',error = error,data=input_data)
     
+# だいじ
 if __name__ == '__main__':
     app.run(debug=True)

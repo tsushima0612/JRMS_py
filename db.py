@@ -66,3 +66,22 @@ def login(mail,password):
         connection.close()
         
     return flg
+
+def account_sort(mail):
+    sql = "SELECT user_rank FROM jrms_accounts WHERE mail = %s"
+    count = 0
+    
+    try :
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql,(mail,))
+        count = cursor.fetchone()
+        
+    except psycopg2.DataError:
+        count = 0
+    
+    finally :
+        cursor.close()
+        connection.close()
+    
+    return count

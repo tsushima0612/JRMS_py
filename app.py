@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect,session
+from flask import Flask, render_template, url_for, request, redirect,session, Blueprint
 import db,string,random
 
 app= Flask(__name__)
@@ -20,8 +20,18 @@ def login():
         return render_template('index.html',error = error,data=input_data)       
     
     if db.login(mail,password):
-        session['user'] = True
-        return redirect(url_for('mypage'))
+        rank = db.account_sort(mail)
+        if(int(rank[0])==3):
+            session['user'] = True
+            return redirect(url_for('mypage'))
+        
+        elif(int(rank[0])==2):
+            session['user'] = True
+            return redirect(url_for('mypage2'))
+        else:
+            error = 'メールアドレス または パスワードが違います'
+            input_data ={'mail':mail,}
+        return render_template('index.html',error=error,data=input_data)
     else :
         error = 'メールアドレス または パスワードが違います'
         input_data ={
@@ -40,6 +50,13 @@ def logout():
 def mypage():
     if 'user' in session:
         return render_template('mypage.html')
+    else:
+        return redirect(url_for('index'))
+    
+@app.route('/mypage2')
+def mypage2():
+    if 'user' in session:
+        return render_template('mypage2.html')
     else:
         return redirect(url_for('index'))
 
@@ -69,8 +86,7 @@ def register_exe():
     else:
         error = 'このメールアドレスは使用されています'
         input_data = {'email':email}
-        return render_template('register_accounts.html',error = error,data=input_data)
-    
+        return render_template('register_accounts.html',error = error,data=input_data) 
 # だいじ
 if __name__ == '__main__':
     app.run(debug=True)

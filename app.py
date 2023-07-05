@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect,session, Blueprint
 import db,string,random
+import urllib.request
 
 app= Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
@@ -59,6 +60,10 @@ def mypage2():
         return render_template('mypage2.html')
     else:
         return redirect(url_for('index'))
+    
+@app.route('/template_download')
+def template_download():
+    return render_template('template_download.html')
 
 #　新規登録
 @app.route('/register_accounts')

@@ -120,11 +120,28 @@ footer{
 }
 
 /* メニュー */
-#menu_set{
-
-}
 
 #select_bottun{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	width: 350px;
+	height: 50px;
+	background-color: white;
+	border:2px solid #000000;
+	color: #000000;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	font-size: 2.2rem;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+}
+
+#download_bottun{
 	display: flex;
 	justify-content: center;
 	text-align: center;

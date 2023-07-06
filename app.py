@@ -65,6 +65,21 @@ def mypage2():
 def template_download():
     return render_template('template_download.html')
 
+@app.route('/mypage')
+def back_menu():
+    return redirect(url_for('mypage'))
+
+#テンプレートダウンロード
+@app.route('/download_exe')
+def template_download_exe():
+    url = "static\download_file\受験申込書＆就職試験報告書 .xls"    
+    urllib.request.urlretrieve(url, './報告書.xls')
+    return redirect(url_for('download_success'))
+
+@app.route('/download_success')
+def download_success():
+    return render_template("download_success.html")
+
 #　新規登録
 @app.route('/register_accounts')
 def register_accounts():

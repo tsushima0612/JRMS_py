@@ -20,7 +20,6 @@ def insert_user(email,password):
     sql = 'INSERT INTO jrms_accounts VALUES(default, %s, %s, %s, %s)'
     
     salt = get_salt()
-    print('salt:'+salt)
     hashed_password = get_hash(password, salt)
     print(hashed_password)
     

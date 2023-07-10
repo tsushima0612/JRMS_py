@@ -1,9 +1,12 @@
 from flask import Flask, render_template, url_for, request, redirect,session, Blueprint
 import db,string,random
 import urllib.request
+from werkzeug.utils import secure_filename
+import os
 
 app= Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
+UPLOAD_FOLDER = 'C:\Users\thushima\Desktop\py最終課題\JRMS_py\upload_file'
 
 # ログイン画面
 @app.route('/')
@@ -40,6 +43,21 @@ def login():
         }
         return render_template('index.html',error=error,data=input_data)
 
+# アップロード
+@app.route('/uploads',methods=['POST'])
+def uploads():
+    if 'file' not in request.files:
+        return redirect(url_for('error'))
+    file = request.files['file']
+    
+    if file.filename == '':
+        return redirect(url_for('error'))
+    
+    name = secure_filename(file.filename)
+    
+    file.save(os.path.join(UPLOAD_FOLDER,name))
+    
+    return render_template('result.html',name='images/'+name)
 #ログアウト
 @app.route('/logout')
 def logout():
@@ -68,6 +86,10 @@ def template_download():
 @app.route('/mypage')
 def back_menu():
     return redirect(url_for('mypage'))
+
+@app.route('/file_upload')
+def file_upload():
+    return render_template('upload.html')
 
 #テンプレートダウンロード
 @app.route('/download_exe')
@@ -107,6 +129,7 @@ def register_exe():
         error = 'このメールアドレスは使用されています'
         input_data = {'email':email}
         return render_template('register_accounts.html',error = error,data=input_data) 
+
 # だいじ
 if __name__ == '__main__':
     app.run(debug=True)

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <title>メニュー画面</title>
+    <title>提出画面</title>
 </head>
 <body>
     <header>
@@ -13,11 +13,7 @@
         <h2 id="sub_title">-報告書提出</h2>
     </header>
     <h1>報告書提出</h1>
-    <p id="back">提出するファイルを選択してください</p>
-    <form id="form" action="uploads" method="post" enctype="multipart/form-data">
-        <input type="file" name="file"><br>
-        <button type="submit">Upload</button>
-    </form>
+    <p id="back">提出完了しました</p>
     <a href="{{url_for('back_menu')}}" id="back">もどる</a>
     <footer> </footer>
 </body>

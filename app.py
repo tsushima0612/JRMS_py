@@ -6,7 +6,7 @@ import os
 
 app= Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
-UPLOAD_FOLDER = 'C:\Users\thushima\Desktop\py最終課題\JRMS_py\upload_file'
+UPLOAD_FOLDER = 'C:/Users/thushima/Desktop/py最終課題/JRMS_py/upload_file'
 
 # ログイン画面
 @app.route('/')
@@ -47,17 +47,25 @@ def login():
 @app.route('/uploads',methods=['POST'])
 def uploads():
     if 'file' not in request.files:
-        return redirect(url_for('error'))
+        return redirect(url_for('def_upload'))
     file = request.files['file']
     
     if file.filename == '':
-        return redirect(url_for('error'))
+        return redirect(url_for('def_upload'))
     
     name = secure_filename(file.filename)
     
     file.save(os.path.join(UPLOAD_FOLDER,name))
-    
-    return render_template('result.html',name='images/'+name)
+    db.save_file(name)
+    return redirect(url_for('upload_result'))
+
+@app.route('/upload_result')
+def upload_result():
+    return render_template('upload_result.html')
+
+@app.route('/upload')
+def def_upload():
+    return render_template('upload.html')
 #ログアウト
 @app.route('/logout')
 def logout():

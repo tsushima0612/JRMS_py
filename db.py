@@ -84,3 +84,24 @@ def account_sort(mail):
         connection.close()
     
     return count
+
+def save_file(file_name):
+    sql = "INSERT INTO jrms_file VALUES(default, %s, current_timestamp, '0')"
+    count = 0
+    
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (file_name,))
+        count = cursor.rowcount #更新件数を取得
+        connection.commit()
+    
+    except psycopg2.DatabaseError:
+        count = 0
+    
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count

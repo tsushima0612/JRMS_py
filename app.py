@@ -46,6 +46,7 @@ def login():
 # アップロード
 @app.route('/uploads',methods=['POST'])
 def uploads():
+    Fname = request.form.get('name')
     if 'file' not in request.files:
         return redirect(url_for('def_upload'))
     file = request.files['file']
@@ -53,8 +54,7 @@ def uploads():
     if file.filename == '':
         return redirect(url_for('def_upload'))
     
-    name = secure_filename(file.filename)
-    
+    name = Fname + ".pdf"
     file.save(os.path.join(UPLOAD_FOLDER,name))
     db.save_file(name)
     return redirect(url_for('upload_result'))

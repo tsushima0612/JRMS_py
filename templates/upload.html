@@ -15,7 +15,10 @@
     <h1>報告書提出</h1>
     <p id="back">提出するファイルを選択してください</p>
     <form id="form" action="uploads" method="post" enctype="multipart/form-data">
+        <label id="label">会社名：</label><br>
+        <input type="text" name="name"><br>
         <input type="file" name="file"><br>
+        
         <button type="submit">Upload</button>
     </form>
     <a href="{{url_for('back_menu')}}" id="back">もどる</a>

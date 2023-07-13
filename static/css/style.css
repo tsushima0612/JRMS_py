@@ -107,6 +107,8 @@ footer{
 
 #register_failed{
 	color: red;
+	display: flex;
+	justify-content: center;
 }
 
 #register_success{

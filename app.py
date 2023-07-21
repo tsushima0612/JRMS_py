@@ -27,10 +27,12 @@ def login():
         rank = db.account_sort(mail)
         if(int(rank[0])==3):
             session['user'] = True
+            session['rank'] = 3
             return redirect(url_for('mypage'))
         
         elif(int(rank[0])==2):
             session['user'] = True
+            session['rank'] = 2
             return redirect(url_for('mypage2'))
         else:
             error = 'メールアドレス または パスワードが違います'
@@ -95,9 +97,21 @@ def template_download():
 def back_menu():
     return redirect(url_for('mypage'))
 
+@app.route('/mypage2')
+def back_menu2():
+    return redirect(url_for('mypage2'))
+
 @app.route('/file_upload')
 def file_upload():
     return render_template('upload.html')
+
+@app.route('/search_file')
+def search_file():
+    return render_template('search_file.html')
+
+@app.route('/delete_file')
+def delete_file():
+    return render_template('delete_file.html')
 
 #テンプレートダウンロード
 @app.route('/download_exe')
@@ -109,6 +123,10 @@ def template_download_exe():
 @app.route('/download_success')
 def download_success():
     return render_template("download_success.html")
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 #　新規登録
 @app.route('/register_accounts')
@@ -137,6 +155,13 @@ def register_exe():
         error = 'このメールアドレスは使用されています'
         input_data = {'email':email}
         return render_template('register_accounts.html',error = error,data=input_data) 
+    
+    #検索
+@app.route('/search_result', methods=['POST'])
+def search_result():
+    keyword = request.form.get('word')
+    rows = db.search_file(keyword)
+    return render_template('search_result.html',rows=rows)
 
 # だいじ
 if __name__ == '__main__':

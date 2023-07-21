@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>検索画面</title>
+</head>
+<body>
+    <header>
+        <h2 id="title">就職活動報告書 管理システム</h2>
+        <h2 id="sub_title">-報告書検索</h2>
+    </header>
+    <h1>報告書検索</h1>
+    <form id="search" action="search_result" method="post">
+        <input id="search_box" type="search" name="word" placeholder="報告書を検索"><br>
+        <input type="submit" name="submit" value="検索">
+    </form>
+    <div id="line"></div>
+    <div id="a_tag">
+    <a href="{{url_for('back_menu')}}" id="back">もどる</a>
+    </div>
+</div>
+    <footer> </footer>
+</body>
+</html>

@@ -105,3 +105,23 @@ def save_file(file_name):
         connection.close()
         
     return count
+
+def search_file(keyword):
+    sql = "SELECT * FROM jrms_file where file_name like %s"
+    keyword = '%' + keyword + '%'
+    
+    try :
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql,(keyword,))
+        rows = cursor.fetchall()
+        
+    except psycopg2.DataError:
+         rows = 0
+    
+    finally :
+         cursor.close()
+         connection.close()
+    
+    print(rows)
+    return rows

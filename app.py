@@ -163,6 +163,14 @@ def search_result():
     rows = db.search_file(keyword)
     return render_template('search_result.html',rows=rows)
 
+#削除
+@app.route('/delete_result', methods=['POST'])
+def selete_result():
+    keyword = request.form.get('word')
+    str(keyword)
+    db.delete_file(keyword)
+    return render_template('delete_result.html')
+
 # だいじ
 if __name__ == '__main__':
     app.run(debug=True)

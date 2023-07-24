@@ -13,6 +13,10 @@
         <h2 id="sub_title">-報告書検索</h2>
     </header>
     <h1>報告書削除</h1>
+    <form id="search" action="delete_result" method="post">
+        <input id="search_box" type="search" name="word" placeholder="削除する報告書のIDを入力"><br>
+        <input type="submit" name="submit" value="削除">
+    </form>
     <div id="a_tag">
         <a href="{{url_for('back_menu2')}}" id="back">もどる</a>
         </div>

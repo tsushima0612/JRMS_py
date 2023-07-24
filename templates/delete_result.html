@@ -5,20 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <title>登録完了</title>
+    <title>検索画面</title>
 </head>
 <body>
     <header>
         <h2 id="title">就職活動報告書 管理システム</h2>
-        <h2 id="sub_title">-新規登録</h2>
+        <h2 id="sub_title">-報告書検索</h2>
     </header>
-    <h1>新規登録</h1>
+    <h1>報告書削除</h1>
+    <p id="a_tag">削除完了しました</p>
     <div id="a_tag">
-        <h2 style="line-height: 230px;">登録完了しました</h2>
+        <a href="{{url_for('back_menu2')}}" id="back">もどる</a>
+        </div>
     </div>
-    <div id="a_tag">
-        <a id="back" href="{{url_for('index')}}">ログイン</a>
-    </div>
-    <footer> </footer>
-</body>
-</html>
+        <footer> </footer>
+    </body>
+    </html>

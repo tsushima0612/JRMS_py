@@ -125,3 +125,21 @@ def search_file(keyword):
     
     print(rows)
     return rows
+
+def delete_file(id):
+    sql = "DELETE FROM jrms_file WHERE id = %s"
+    count = 0
+    try :
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql,(id,))
+        count = cursor.rowcount #更新件数を取得
+        connection.commit()
+        
+    except psycopg2.DataError:
+         count = 0
+    
+    finally :
+         cursor.close()
+         connection.close()
+    return count
